@@ -9,6 +9,10 @@
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
+				<link rel="stylesheet" href="css/sidebar.css">
+				<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.0.2/css/leaflet-sidebar.min.css" integrity="sha384-EPNnjUWfl6+wmqeqVBLV1haeIrms6PXl67DNZ/RVCsfkwT78QX2fe16Gxidc6UOF" crossorigin="" />
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" integrity="sha384-X7L1bhgb36bF1iFvaqvhgpaGpayKM+vXNNYRlF89BFA5s3vi1qZ8EX9086RlZjy1" crossorigin="" />
+				
         <style>
         html, body, #map {
             width: 100%;
@@ -20,6 +24,81 @@
         <title></title>
     </head>
     <body>
+			<div id="sidebar" class="leaflet-sidebar">
+        <div class="leaflet-sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li><a href=#data-sources role="tab"><i class="fa fa-link"></i></a></li>
+                <li><a href="#settings" role="tab"><i class="fa fa-filter"></i></a></li>
+                <li><a href="#download" role="tab"><i class="fa fa-arrow-circle-down"></i></a></li>
+
+            </ul>
+            <ul role="tablist">
+                <li><a href="#about" role="tab"><i class="fa fa-question-circle"></i></a></li>
+            </ul>
+        </div>
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane active" id="home">
+                <h1 class="leaflet-sidebar-header">
+                     Prototype energy demand mapping
+                    <div class="leaflet-sidebar-close"><i class="fa fa-times"></i></div>
+                </h1>
+                <p>The momentum behind SDG7 and Sustainable Energy for All (SE4ALL) underlines a global consensus that universal access to modern energy services is central to the sustainable development agenda and strongly cross-cutting with other sustainable development objectives and goals. Geospatial analysis has proven itself a crucial tool for planning, however, lack of high quality input data often impedes application of modern spatial planning tools.<br>
+								<p>Nepal is currently on its transition to a lower-middle income country and puts strong efforts on improved energy access. Local and Provincial governments must now take the lead and make evidence-based decisions towards shaping their energy future. Currently, the capacities on these levels are still being developed, and the data necessary for making planning decisions severely lacking.<br>
+								<p>This prototype provides the proof of concept for scaling representative primary data collected by leveraging remotely sensed population datasets. Such detailed data is a prerequisite for energy access planning in Nepal. We are currently seeking further funding to scale this approach to the Provincial level to deliver cost-effective data collection, extrapolation, harmonization, sharing tools for planning and project implementation for all governmental and non-governmental stakeholders working on energy access in Nepal.</p>               
+                <p class="license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="data-sources">
+                <h1 class="leaflet-sidebar-header">Methodology<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+								<p>Household energy demand profiles were derived from the primary data. These are composed of primary cooking stove, current basic energy demand (which may be limited by supply technology) and future/supressed energy demand (which reflects the actual demand of each household, if there were no limitations in the supply). Moreover, household primary energy access technology were also determined. In parallel, household respective settlements were identified using remotely sensed population datasets.<br>
+								<p>Using the estimated energy demand profile, the primary energy access technology and the respective location of each household, we were then able to classify each settlement by the typical energy access technology and assign a predominant cookstove technology to it, as well as determine its median current and future energy demand.<br>
+								<p>Finally, through remotely sensed population datasets we were able to determine the total number of household per each settlement and, consequently, estimate its total current and future energy demand.<br>
+								This resulting low-barrier web-map enables administrative bodies to rapidly assess the energy access situation in each settlement without requiring GIS capacity building in the short-midterm.</p>
+
+								</div>
+            <div class="leaflet-sidebar-pane" id="settings">
+                <h1 class="leaflet-sidebar-header">Layers<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                 <p><h3>Turn on and off layers</h3>
+								On the right side, the different information layer on status of energy supply and type of cooking energy can be selected. Selecting either electricity or cooking access checkboxes enables the end-user to visualise access to energy carriers by colour.<br>
+				
+								<p><h3>Detailed Pop-ups</h3> 
+								By clicking on a settlement cluster, detailed information on its characteristics and energy demand profile is provided.
+								In particular, per each settlement, it reports: estimated number of households, predominant cooking stove, median current basic energy demand (which may be limited by supply technology), median future/supressed energy demand (which reflects the actual demand of each household, if there were no limitations in the supply) as well as total basic and future household electricity demand.<br>
+
+                <br>
+            </div>
+            <div class="leaflet-sidebar-pane" id="about">
+                <h1 class="leaflet-sidebar-header">
+                     About the map
+                    <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+                </h1>
+               <p><a href="https://reiner-lemoine-institut.de/" target="_blank">Reiner Lemoine Institut gGmbH (RLI)</a> is an independent non-profit research institution whose mission is to find paths to a sustainable energy supply based on 100 % renewable energy sources. The Off-grid Systems research group within the RLI supports the development of sustainable energy supply for remote regions by combining primary data collection with geospatial analysis and energy system simulations.</p>
+								<p>Kathmandu Living Labs (KLL) is a civic technology company. KLL activates, inspires, and leads a community of young changemakers who are excited about using high impact technology to transform our societies. KLL creates the digital infrastructure so that government, non-profits and businesses can use 21st century tools to provide everyday citizens with better services.</p>
+								<p>Flowminder Foundation is a non-profit organisation whose mission is to improve public health and welfare in low- and middle-income countries. Flowminder work with governments, inter-governmental organisations and NGOs to collect, aggregate, integrate and analyse anonymous mobile operator data, satellite and household survey data.</p>
+								<p>Alternative Energy Promotion Centre, Government of Nepal (AEPC) functions under the Ministry of Energy, Water Resources and Irrigation, their mission is to make renewable energy mainstream resource through increased access, knowledge and adaptability contributing to the improved living conditions of people in Nepal.</p>
+								<p>Renewable Energy for Rural Livelihoods (RERL)is a joint project of Government of Nepal, UNDP and GEF and supports AEPC in remove barriers for scaling up of interventions to promote less disseminated larger renewable energy systems.
+								Ministry of Physical Infrastructure Development in Province 7 is responsible for overall development of infrastructure including provincial energy planning. The province has one of the lowest energy access in the country while having a large potential for both large and small scale renewable energy resources. </p>
+								<p>Deutsche Gesellschaft für Internationale Zusammenarbeit GmbH (GIZ Nepal) under the project Renewable Energy for Rural Areas (RERA) aims to ensure efficient and effective service delivery of small-scale renewable energy through improved outreach and enhanced local cooperation in a federalized and decentralized Nepal. </p>
+                
+            </div>
+            <div class="leaflet-sidebar-pane" id="download">
+                <h1 class="leaflet-sidebar-header">
+                        Data sources
+                        <div class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></div>
+                    </h1>
+                <p><p>The spatially disaggregated dataset used for the analysis results from the combination of primary survey data with remotely sensed population datasets. 
+								The survey data were collected between January and July 2018 through an energy demand survey method aligned with the World Bank multi-tier framework which was successfully applied across 14 pilot municipalities. Sampling strata of 400 households per municipality (5,600 households in total) were generated using the novel gridded spatial sampling method (<a href="http://GridSample.org" target="_blank">GridSample.org</a>).
+								<p>As for remotely sensed population datasets, they are available and were downloaded from the following sources: 
+								<a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a><br> and <a href="http://www.worldpop.org.uk/" target="_blank">WorldPop</a>.<br></p>
+								
+                <p class="license"><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+            </div>
+        </div>
+</div>
+		
+		
+		
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -35,10 +114,20 @@
         <script src="data/Municipality_1.js"></script>
         <script src="data/CookingAccess_2.js"></script>
         <script src="data/ElectricityAccess_3.js"></script>
+				<script src="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.0.2/js/leaflet-sidebar.min.js" integrity="sha384-LzTQ6yhqVy/ipjMq5MMk98mo0E64Wtu9K1Jm5OeKPolnqrlv3FMdc457RoOANGMb" crossorigin=""></script>
         <script>
+				
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
         })
+				
+				let sidebar = L.control.sidebar({
+            container: "sidebar",
+            closeButton: true,
+            position: "left"
+        }).addTo(map);
+				
+				
         var hash = new L.Hash(map);
         map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
         var measureControl = new L.Control.Measure({
