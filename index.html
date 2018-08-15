@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Municipality_1.js"></script>
+        <script src="data/CookingAccess_2.js"></script>
+        <script src="data/ElectricityAccess_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        var overlay_OpenStreetMap_0 = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0
+        });
+        overlay_OpenStreetMap_0.addTo(map);
+        map.addLayer(overlay_OpenStreetMap_0);
+        function pop_Municipality_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>DISTRICT</strong><br />' + (feature.properties['DISTRICT'] !== null ? Autolinker.link(String(feature.properties['DISTRICT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Municip.</strong><br />' + (feature.properties['Municip.'] !== null ? Autolinker.link(String(feature.properties['Municip.'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Municipality_1_0() {
+            return {
+                pane: 'pane_Municipality_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Municipality_1');
+        map.getPane('pane_Municipality_1').style.zIndex = 401;
+        map.getPane('pane_Municipality_1').style['mix-blend-mode'] = 'normal';
+        var layer_Municipality_1 = new L.geoJson(json_Municipality_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Municipality_1',
+            onEachFeature: pop_Municipality_1,
+            style: style_Municipality_1_0,
+        });
+        bounds_group.addLayer(layer_Municipality_1);
+        map.addLayer(layer_Municipality_1);
+        function pop_CookingAccess_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>ClusterID</strong><br />' + (feature.properties['ClusterID'] !== null ? Autolinker.link(String(feature.properties['ClusterID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Households</strong><br />' + (feature.properties['Households'] !== null ? Autolinker.link(String(feature.properties['Households'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Typical Cooking Stove</strong><br />' + (feature.properties['Typical Cooking Stove'] !== null ? Autolinker.link(String(feature.properties['Typical Cooking Stove'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CookingAccess_2_0(feature) {
+            switch(String(feature.properties['Typical Cooking Stove'])) {
+                case 'Unimproved':
+                    return {
+                pane: 'pane_CookingAccess_2',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+                    break;
+                case 'ICS':
+                    return {
+                pane: 'pane_CookingAccess_2',
+                opacity: 1,
+                color: 'rgba(104,104,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+                    break;
+                case 'BLENs':
+                    return {
+                pane: 'pane_CookingAccess_2',
+                opacity: 1,
+                color: 'rgba(43,131,186,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CookingAccess_2');
+        map.getPane('pane_CookingAccess_2').style.zIndex = 402;
+        map.getPane('pane_CookingAccess_2').style['mix-blend-mode'] = 'normal';
+        var layer_CookingAccess_2 = new L.geoJson(json_CookingAccess_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_CookingAccess_2',
+            onEachFeature: pop_CookingAccess_2,
+            style: style_CookingAccess_2_0,
+        });
+        bounds_group.addLayer(layer_CookingAccess_2);
+        function pop_ElectricityAccess_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>ClusterID</strong><br />' + (feature.properties['ClusterID'] !== null ? Autolinker.link(String(feature.properties['ClusterID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Households</strong><br />' + (feature.properties['Households'] !== null ? Autolinker.link(String(feature.properties['Households'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Electricity Access</strong><br />' + (feature.properties['Electricity Access'] !== null ? Autolinker.link(String(feature.properties['Electricity Access'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Typical Cooking Stove</strong><br />' + (feature.properties['Typical Cooking Stove'] !== null ? Autolinker.link(String(feature.properties['Typical Cooking Stove'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Median Household Minimum Demand (Wp)</strong><br />' + (feature.properties['Median Household Minimum Demand (Wp)'] !== null ? Autolinker.link(String(feature.properties['Median Household Minimum Demand (Wp)'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Median Household Future/Supressed Demand (Wp)</strong><br />' + (feature.properties['Median Household Future/Supressed Demand (Wp)'] !== null ? Autolinker.link(String(feature.properties['Median Household Future/Supressed Demand (Wp)'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Approx. Total Minimum Household Demand (kWp)</strong><br />' + (feature.properties['Approx. Total Minimum Household Demand (kWp)'] !== null ? Autolinker.link(String(feature.properties['Approx. Total Minimum Household Demand (kWp)'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Approx. Total Future/Supressed Household Demand (kWp)</strong><br />' + (feature.properties['Approx. Total Future/Supressed Household Demand (kWp)'] !== null ? Autolinker.link(String(feature.properties['Approx. Total Future/Supressed Household Demand (kWp)'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ElectricityAccess_3_0(feature) {
+            switch(String(feature.properties['Electricity Access'])) {
+                case 'Off-Grid':
+                    return {
+                pane: 'pane_ElectricityAccess_3',
+                opacity: 1,
+                color: 'rgba(255,158,1,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+                    break;
+                case 'Mini-Grid':
+                    return {
+                pane: 'pane_ElectricityAccess_3',
+                opacity: 1,
+                color: 'rgba(32,144,141,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+                    break;
+                case 'Grid':
+                    return {
+                pane: 'pane_ElectricityAccess_3',
+                opacity: 1,
+                color: 'rgba(68,1,84,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_ElectricityAccess_3');
+        map.getPane('pane_ElectricityAccess_3').style.zIndex = 403;
+        map.getPane('pane_ElectricityAccess_3').style['mix-blend-mode'] = 'normal';
+        var layer_ElectricityAccess_3 = new L.geoJson(json_ElectricityAccess_3, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ElectricityAccess_3',
+            onEachFeature: pop_ElectricityAccess_3,
+            style: style_ElectricityAccess_3_0,
+        });
+        bounds_group.addLayer(layer_ElectricityAccess_3);
+        map.addLayer(layer_ElectricityAccess_3);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Electricity Access<br /><table><tr><td style="text-align: center;"><img src="legend/ElectricityAccess_3_OffGridSolar0.png" /></td><td>Off-Grid Solar</td></tr><tr><td style="text-align: center;"><img src="legend/ElectricityAccess_3_MiniGrid1.png" /></td><td>Mini-Grid</td></tr><tr><td style="text-align: center;"><img src="legend/ElectricityAccess_3_Grid2.png" /></td><td>Grid</td></tr></table>': layer_ElectricityAccess_3,'Cooking Access<br /><table><tr><td style="text-align: center;"><img src="legend/CookingAccess_2_Unimproved0.png" /></td><td>Unimproved</td></tr><tr><td style="text-align: center;"><img src="legend/CookingAccess_2_ICS1.png" /></td><td>ICS</td></tr><tr><td style="text-align: center;"><img src="legend/CookingAccess_2_BLENs2.png" /></td><td>BLENs</td></tr></table>': layer_CookingAccess_2,'<img src="legend/Municipality_1.png" /> Municipality': layer_Municipality_1,"OpenStreetMap": overlay_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
